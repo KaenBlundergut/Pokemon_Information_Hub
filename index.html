@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pokémon Sprites Gallery</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Header with a golden parallelogram -->
+  <header>
+    <h1>Pokémon Sprites</h1>
+  </header>
+
+  <!-- Tabs navigation -->
+  <div class="tabs">
+    <button class="tab-button active" data-tab="challenges">Challenges</button>
+    <button class="tab-button" data-tab="pokemon">Pokémon</button>
+    <button class="tab-button" data-tab="sandwiches">Sandwiches</button>
+    <button class="tab-button" data-tab="typechart">Type Chart</button>
+  </div>
+
+  <!-- Challenges Section -->
+  <div class="tab-content" id="challenges" style="display: block;">
+    <h2>Challenges</h2>
+    <p>Here you can describe challenges or leave it as a placeholder.</p>
+  </div>
+
+  <!-- Pokémon Section with Search -->
+  <div class="tab-content" id="pokemon">
+    <h2>Pokémon</h2>
+    <!-- Search Bar -->
+    <input type="text" id="searchInput" placeholder="Search Pokémon..." />
+    <!-- Pokémon sprites will be filtered here -->
+    <div class="pokemon-list" id="pokemon-container"></div>
+  </div>
+
+  <!-- Sandwiches Section -->
+  <div class="tab-content" id="sandwiches">
+    <h2>Sandwiches</h2>
+    <p>Content about sandwiches or placeholders.</p>
+  </div>
+
+  <!-- Type Chart Section -->
+  <div class="tab-content" id="typechart">
+    <h2>Type Chart</h2>
+    <p>Content about Pokémon types or placeholders.</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

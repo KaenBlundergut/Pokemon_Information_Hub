@@ -1,0 +1,96 @@
+/* Reset styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body with darker honeycomb pattern background */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #000; /* Solid black background */
+
+  /* Honeycomb pattern SVG with darker grey tones */
+  background-image: 
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='70' height='60'><polygon points='35,0 70,15 70,45 35,60 0,45 0,15' fill='%23333333' stroke='%23000000' stroke-width='2'/></svg>");
+  background-repeat: repeat;
+  background-size: 70px 60px;
+
+  padding: 20px;
+  color: #fff; /* Text color */
+}
+
+/* Header in a golden parallelogram */
+header {
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #FFD700; /* Gold color */
+  transform: skewX(-20deg);
+  display: inline-block;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+header h1 {
+  transform: skewX(20deg); /* Undo skew for text */
+  font-size: 2em;
+  text-align: center;
+  color: #222; /* Dark text inside gold banner */
+}
+
+/* Tabs container */
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* Style for tab buttons - yellow with hover effect */
+.tab-button {
+  background-color: #FFD700; /* Yellow/golden color */
+  color: #222; /* Dark text for contrast */
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin: 0 5px;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+  font-weight: bold;
+}
+
+.tab-button:hover,
+.tab-button.active {
+  background-color: #FFC107; /* Slightly darker yellow on hover/active */
+  color: #000; /* Darker text on hover/active */
+}
+
+/* Content sections with a styled box */
+.tab-content {
+  display: none; /* hidden by default, shown via JS */
+  padding: 20px;
+  background-color: #222; /* dark background for content box */
+  border-radius: 8px;
+  border: 2px solid #444; /* subtle border for separation */
+  margin-bottom: 30px;
+}
+
+/* Pokémon sprites grid */
+.pokemon-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.pokemon-list img {
+  width: 80px;
+  height: auto;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.pokemon-list img:hover {
+  transform: scale(1.1);
+  border-color: #007bff;
+}
