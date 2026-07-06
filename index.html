@@ -28,16 +28,22 @@
   <!-- Pokémon Section with Search and Sprites Gallery -->
   <div class="tab-content" id="pokemon">
     <h2>Pokémon</h2>
-    <!-- Search Bar -->
+    <!-- Search Box -->
     <input type="text" id="searchInput" placeholder="Search Pokémon..." />
 
-    <!-- Sprites Gallery -->
-    <h3>Sprites Gallery</h3>
-    <div id="sprites-gallery" class="sprites-grid"></div>
-
-    <!-- Shiny Sprites Gallery -->
-    <h3>Shiny Sprites</h3>
-    <div id="shiny-sprites-gallery" class="sprites-grid"></div>
+    <!-- Container for sprite sections side by side -->
+    <div class="sprite-sections">
+      <!-- Regular Sprites Box -->
+      <div class="sprite-box">
+        <h3 style="text-align:center;">Sprites</h3>
+        <div id="sprites-gallery" class="sprites-grid"></div>
+      </div>
+      <!-- Shiny Sprites Box -->
+      <div class="sprite-box">
+        <h3 style="text-align:center;">Shiny Sprites</h3>
+        <div id="shiny-sprites-gallery" class="sprites-grid"></div>
+      </div>
+    </div>
   </div>
 
   <!-- Sandwiches Section -->

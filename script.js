@@ -13,7 +13,7 @@ document.querySelectorAll('.tab-button').forEach(button => {
 
     // If Pokémon tab is activated, initialize Pokémon display
     if (target === 'pokemon') {
-      displayPokemons(); // Call the function to display Pokémon
+      displayPokemons(); // your existing Pokémon display function
     }
   });
 });
@@ -27,7 +27,7 @@ const searchInput = document.getElementById('searchInput');
 
 // Function to display Pokémon based on filter
 function displayPokemons(filter = '') {
-  // Currently, your Pokémon display code is minimal, so skipping here
+  // Your existing Pokémon display code (if any)
 }
 
 // Event listener for search box
@@ -67,5 +67,5 @@ async function loadSpritesGallery() {
   }
 }
 
-// Call this function after page load
+// Call this function after page loads
 loadSpritesGallery();
