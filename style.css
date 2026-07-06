@@ -82,15 +82,23 @@ header h1 {
   margin-top: 10px;
 }
 
-.pokemon-list img {
+/* New sprite gallery styles */
+.sprites-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.sprites-grid img {
   width: 80px;
   height: auto;
   border: 2px solid #ccc;
   border-radius: 8px;
   transition: transform 0.2s, border-color 0.2s;
 }
-
-.pokemon-list img:hover {
+.sprites-grid img:hover {
   transform: scale(1.1);
   border-color: #007bff;
 }

@@ -27,42 +27,7 @@ const searchInput = document.getElementById('searchInput');
 
 // Function to display Pokémon based on filter
 function displayPokemons(filter = '') {
-  container.innerHTML = ''; // Clear current sprites
-
-  // Filter Pokémon IDs based on search
-  const filteredIds = pokemonIds.filter(id => {
-    // For simplicity, match ID or name if you have names
-    const name = getPokemonName(id).toLowerCase();
-    return id.toString().includes(filter) || name.includes(filter);
-  });
-
-  filteredIds.forEach(id => {
-    const idStr = String(id).padStart(3, '0');
-
-    const normalImg = document.createElement('img');
-    normalImg.src = `assets/sprites/${idStr}bulbasaur.png`; // Adjust filename pattern
-    normalImg.alt = `Pokemon ${id}`;
-
-    const shinyImg = document.createElement('img');
-    shinyImg.src = `assets/shiny_sprites/${idStr}nidoranf shiny.png`; // Adjust filename pattern
-    shinyImg.alt = `Shiny Pokemon ${id}`;
-
-    // Append images
-    container.appendChild(normalImg);
-    container.appendChild(shinyImg);
-  });
-}
-
-// Example function to get Pokémon name by ID (can be customized)
-function getPokemonName(id) {
-  const names = {
-    1: 'bulbasaur',
-    2: 'ivysaur',
-    3: 'venusaur',
-    29: 'nidoran-f',
-    150: 'mewtwo'
-  };
-  return names[id] || 'pokemon';
+  // Currently, your Pokémon display code is minimal, so skipping here
 }
 
 // Event listener for search box
@@ -71,5 +36,36 @@ searchInput.addEventListener('input', () => {
   displayPokemons(filter);
 });
 
-// Initialize display when Pokémon tab is first shown
-// Optionally, call displayPokemons() here to show all by default
+// Load and display sprites from JSON files
+async function loadSpritesGallery() {
+  try {
+    // Load regular sprites
+    const responseSprites = await fetch('assets/sprites.json');
+    const spriteFilenames = await responseSprites.json();
+
+    const gallery = document.getElementById('sprites-gallery');
+    spriteFilenames.forEach(filename => {
+      const img = document.createElement('img');
+      img.src = `assets/sprites/${filename}`;
+      img.alt = filename;
+      gallery.appendChild(img);
+    });
+
+    // Load shiny sprites
+    const responseShiny = await fetch('assets/shiny_sprites.json');
+    const shinyFilenames = await responseShiny.json();
+
+    const shinyGallery = document.getElementById('shiny-sprites-gallery');
+    shinyFilenames.forEach(filename => {
+      const img = document.createElement('img');
+      img.src = `assets/shiny_sprites/${filename}`;
+      img.alt = filename;
+      shinyGallery.appendChild(img);
+    });
+  } catch (error) {
+    console.error('Error loading sprite galleries:', error);
+  }
+}
+
+// Call this function after page load
+loadSpritesGallery();
