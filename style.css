@@ -106,7 +106,7 @@ header h1 {
   align-items: center;
   justify-content: start;
   /* Bring to front */
-  z-index: 9999;
+  z-index: 99999999999;
   position: relative; /* so z-index works */
   /* Optional: add box-shadow for depth */
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
