@@ -28,22 +28,11 @@
   <!-- Pokémon -->
   <div class="tab-content" id="pokemon">
     <h2>Pokémon</h2>
-    <!-- Pokémon list will be generated here -->
-    <div id="pokemon-list-container"></div>
+    <!-- Search bar -->
+    <input type="text" id="searchInput" placeholder="Search Pokémon..." />
 
-    <!-- Sprite galleries for all Pokémon (loaded once) -->
-    <div class="sprite-sections" style="margin-top:30px;">
-      <!-- Regular Sprites -->
-      <div class="sprite-box" style="margin-bottom:20px;">
-        <h3 style="text-align:center;">Sprites</h3>
-        <div id="sprites-gallery" class="sprites-grid"></div>
-      </div>
-      <!-- Shiny Sprites -->
-      <div class="sprite-box">
-        <h3 style="text-align:center;">Shiny Sprites</h3>
-        <div id="shiny-sprites-gallery" class="sprites-grid"></div>
-      </div>
-    </div>
+    <!-- Pokémon list -->
+    <div id="pokemon-list-container" style="margin-top:20px;"></div>
   </div>
 
   <!-- Sandwiches -->
@@ -58,7 +47,7 @@
     <p>Content about Pokémon types or placeholders.</p>
   </div>
 
-  <!-- Modal for sprites popup -->
+  <!-- Modal for sprite popup -->
   <div id="spritesModal" class="modal">
     <div class="modal-content">
       <span class="close-button" id="closeModal">&times;</span>

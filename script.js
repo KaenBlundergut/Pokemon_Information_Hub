@@ -1,4 +1,4 @@
-// Handle tab switching
+// Tab switching logic
 document.querySelectorAll('.tab-button').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
@@ -14,7 +14,7 @@ document.querySelectorAll('.tab-button').forEach(btn => {
   });
 });
 
-// Load Pokémon data and create list dynamically
+// Load Pokémon list with search
 async function loadAndDisplayPokemonList() {
   try {
     const response = await fetch('pokemonData.json');
@@ -22,6 +22,9 @@ async function loadAndDisplayPokemonList() {
 
     const container = document.getElementById('pokemon-list-container');
     container.innerHTML = '';
+
+    // Store full data for filtering
+    window.pokemonFullData = pokemonData;
 
     pokemonData.forEach(poke => {
       const div = document.createElement('div');
@@ -40,7 +43,28 @@ async function loadAndDisplayPokemonList() {
   }
 }
 
-// Load sprite galleries (all Pokémon sprites)
+// Search filter
+document.getElementById('searchInput').addEventListener('input', () => {
+  const filter = document.getElementById('searchInput').value.toLowerCase();
+  const data = window.pokemonFullData || [];
+  const filtered = data.filter(p => p.name.toLowerCase().includes(filter));
+  const container = document.getElementById('pokemon-list-container');
+  container.innerHTML = '';
+  filtered.forEach(poke => {
+    const div = document.createElement('div');
+    div.className = 'pokemon-name';
+    div.textContent = poke.name;
+    div.dataset.name = poke.name;
+    div.dataset.sprites = JSON.stringify([poke.sprite]);
+    div.dataset.shiny = JSON.stringify([poke.shiny]);
+    div.addEventListener('click', () => {
+      openSpritesModal(poke.name, [poke.sprite], [poke.shiny]);
+    });
+    container.appendChild(div);
+  });
+});
+
+// Load all sprite galleries (for reference)
 async function loadSpritesGallery() {
   try {
     const responseSprites = await fetch('assets/sprites.json');
@@ -55,8 +79,6 @@ async function loadSpritesGallery() {
         img.alt = filename;
         gallery.appendChild(img);
       });
-    } else {
-      console.error('Element with ID "sprites-gallery" not found.');
     }
 
     const responseShiny = await fetch('assets/shiny_sprites.json');
@@ -71,15 +93,13 @@ async function loadSpritesGallery() {
         img.alt = filename;
         shinyGallery.appendChild(img);
       });
-    } else {
-      console.error('Element with ID "shiny-sprites-gallery" not found.');
     }
   } catch (error) {
     console.error('Error loading sprite galleries:', error);
   }
 }
 
-// Modal handling
+// Modal controls
 const modal = document.getElementById('spritesModal');
 const closeBtn = document.getElementById('closeModal');
 
@@ -111,11 +131,11 @@ function openSpritesModal(pokemonName, spriteFiles, shinyFiles) {
   modal.style.display = 'block';
 }
 
-// Initialize on page load
+// Initialize on DOM load
 window.addEventListener('DOMContentLoaded', () => {
   loadSpritesGallery();
   loadAndDisplayPokemonList();
 
-  // Activate Pokémon tab by default
+  // Default tab
   document.querySelector('.tab-button[data-tab="pokemon"]').click();
 });

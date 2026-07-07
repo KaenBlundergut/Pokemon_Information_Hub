@@ -5,7 +5,7 @@
   box-sizing: border-box;
 }
 
-/* Body */
+/* Body styling with background pattern */
 body {
   font-family: Arial, sans-serif;
   background-color: #000;
@@ -18,7 +18,7 @@ body {
   line-height: 1.4;
 }
 
-/* Header */
+/* Header styling */
 header {
   margin-bottom: 30px;
   padding: 20px;
@@ -26,7 +26,6 @@ header {
   transform: skewX(-20deg);
   display: inline-block;
 }
-
 header h1 {
   transform: skewX(20deg);
   font-size: 2em;
@@ -34,14 +33,13 @@ header h1 {
   color: #222;
 }
 
-/* Tabs */
+/* Tabs styling */
 .tabs {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   margin-bottom: 20px;
 }
-
 .tab-button {
   background-color: #FFD700;
   color: #222;
@@ -55,7 +53,6 @@ header h1 {
   transition: background-color 0.3s, color 0.3s, transform 0.2s;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
-
 .tab-button:hover,
 .tab-button.active {
   background-color: #FFC107;
@@ -73,19 +70,16 @@ header h1 {
   max-width: 1200px;
   margin: 0 auto 30px auto;
 }
-
 .show {
   display: block;
 }
 
-/* Pokémon list items */
+/* Pokémon name styles (clickable) */
 #pokemon-list-container {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
-
-/* Pokémon name styles */
 .pokemon-name {
   cursor: pointer;
   padding: 8px 12px;
@@ -97,7 +91,7 @@ header h1 {
   background-color: #666;
 }
 
-/* Sprite grids */
+/* Sprite grid styles */
 .sprites-grid {
   display: flex;
   flex-wrap: wrap;
