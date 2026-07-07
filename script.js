@@ -17,7 +17,7 @@ document.querySelectorAll('.tab-button').forEach(btn => {
 // Load Pokémon data and display list and hexagons
 async function loadAndDisplayPokemon() {
   try {
-    const response = await fetch('pokemonData.json');
+    const response = await fetch('assets/pokemonData.json'); // Corrected path
     const data = await response.json();
 
     window.pokemonData = data;
@@ -39,7 +39,7 @@ async function loadAndDisplayPokemon() {
       listContainer.appendChild(div);
     });
 
-    // Generate hexagon buttons
+    // Generate hexagons
     generateHexagons();
 
   } catch (err) {
@@ -47,7 +47,6 @@ async function loadAndDisplayPokemon() {
   }
 }
 
-// Generate hexagon buttons
 function generateHexagons() {
   const container = document.getElementById('hexagon-container');
   container.innerHTML = '';
@@ -90,13 +89,15 @@ document.getElementById('searchInput').addEventListener('input', () => {
 // Load sprite galleries (reference, optional)
 async function loadSpriteGalleries() {
   try {
-    const respSprites = await fetch('assets/sprites.json');
-    const spritesList = await respSprites.json();
+    // Fetch list of sprite filenames for reference gallery
+    const responseSprites = await fetch('assets/sprites.json');
+    const spriteFilenames = await responseSprites.json();
 
+    // Create and populate the reference sprite gallery
     const gallery = document.createElement('div');
     gallery.id = 'sprites-gallery';
 
-    spritesList.forEach(filename => {
+    spriteFilenames.forEach(filename => {
       const img = document.createElement('img');
       img.src = `assets/sprites/${filename}`;
       img.alt = filename;
@@ -104,18 +105,21 @@ async function loadSpriteGalleries() {
     });
     document.body.appendChild(gallery);
 
-    const respShiny = await fetch('assets/shiny_sprites.json');
-    const shinyList = await respShiny.json();
+    // Fetch list of shiny sprite filenames for reference gallery
+    const responseShiny = await fetch('assets/shiny_sprites.json');
+    const shinyFilenames = await responseShiny.json();
+
     const shinyGallery = document.createElement('div');
     shinyGallery.id = 'shiny-sprites-gallery';
 
-    shinyList.forEach(filename => {
+    shinyFilenames.forEach(filename => {
       const img = document.createElement('img');
       img.src = `assets/shiny_sprites/${filename}`;
       img.alt = filename;
       shinyGallery.appendChild(img);
     });
     document.body.appendChild(shinyGallery);
+
   } catch (err) {
     console.error('Error loading sprite galleries:', err);
   }
