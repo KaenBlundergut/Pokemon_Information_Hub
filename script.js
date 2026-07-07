@@ -100,18 +100,20 @@ function renderPokemonList(names) {
     renderPokemonList(filteredNames);
   });
 
-// Tab switching
-const tabButtons = document.querySelectorAll('.main-button');
-const tabContents = document.querySelectorAll('.tab-content');
-
-tabButtons.forEach(btn => {
+// When a tab button is clicked
+tabs.forEach(btn => {
   btn.addEventListener('click', () => {
-    const target = btn.dataset.tab;
+    const targetId = btn.getAttribute('data-tab');
+    // Show the target tab and hide others
     tabContents.forEach(tc => {
-      tc.classList.toggle('hidden', tc.id !== target);
+      if (tc.id === targetId) {
+        tc.classList.remove('hidden');
+      } else {
+        tc.classList.add('hidden');
+      }
     });
-    // When switching to Pokedex, refresh list
-    if (target === 'pokedex') {
+    // Refresh Pokedex when shown
+    if (targetId === 'pokedex') {
       groupPokemon();
       populatePokedex();
     }
