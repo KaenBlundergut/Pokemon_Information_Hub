@@ -1,126 +1,82 @@
 // Handle tab switching
-document.querySelectorAll('.tab-button').forEach(button => {
-  button.addEventListener('click', () => {
-    // Remove active class from all buttons
-    document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-    // Add active class to clicked button
-    button.classList.add('active');
+document.querySelectorAll('.tab-button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
 
-    const target = button.dataset.tab;
-
-    // Hide all tab contents
-    document.querySelectorAll('.tab-content').forEach(content => {
-      content.style.display = 'none';
-    });
-    // Show the selected tab content
+    const target = btn.dataset.tab;
+    document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
     document.getElementById(target).style.display = 'block';
 
-    // Load sprites only when Pokémon tab is opened
     if (target === 'pokemon') {
-      loadSpritesGallery();
+      loadAndDisplayPokemonList();
     }
   });
 });
 
-// Load and display sprites from JSON files
-async function loadSpritesGallery() {
+// Load Pokémon data and create list dynamically
+async function loadAndDisplayPokemonList() {
   try {
-    // Load regular sprites filenames
-    const responseSprites = await fetch('assets/sprites.json');
-    const spriteFilenames = await responseSprites.json();
+    const response = await fetch('pokemonData.json');
+    const pokemonData = await response.json();
 
-    const gallery = document.getElementById('sprites-gallery');
-    gallery.innerHTML = '';
+    const container = document.getElementById('pokemon-list-container');
+    container.innerHTML = '';
 
-    spriteFilenames.forEach(filename => {
-      const img = document.createElement('img');
-      img.src = `assets/sprites/${filename}`;
-      img.alt = filename;
-      gallery.appendChild(img);
+    pokemonData.forEach(poke => {
+      const div = document.createElement('div');
+      div.className = 'pokemon-name';
+      div.textContent = poke.name;
+      div.dataset.name = poke.name;
+      div.dataset.sprites = JSON.stringify([poke.sprite]);
+      div.dataset.shiny = JSON.stringify([poke.shiny]);
+      div.addEventListener('click', () => {
+        openSpritesModal(poke.name, [poke.sprite], [poke.shiny]);
+      });
+      container.appendChild(div);
     });
-
-    // Load shiny sprites filenames
-    const responseShiny = await fetch('assets/shiny_sprites.json');
-    const shinyFilenames = await responseShiny.json();
-
-    const shinyGallery = document.getElementById('shiny-sprites-gallery');
-    shinyGallery.innerHTML = '';
-
-    shinyFilenames.forEach(filename => {
-      const img = document.createElement('img');
-      img.src = `assets/shiny_sprites/${filename}`;
-      img.alt = filename;
-      shinyGallery.appendChild(img);
-    });
-  } catch (error) {
-    console.error('Error loading sprite galleries:', error);
+  } catch (err) {
+    console.error('Error loading Pokémon data:', err);
   }
 }
 
-// Initialize after DOM content is loaded
-window.addEventListener('DOMContentLoaded', () => {
-  // Load sprites once DOM is ready
-  loadSpritesGallery();
+// Modal handling
+const modal = document.getElementById('spritesModal');
+const closeBtn = document.getElementById('closeModal');
 
-  // Initialize default tab (simulate click)
-  const activeTabButton = document.querySelector('.tab-button.active');
-  if (activeTabButton) {
-    activeTabButton.click();
-  }
+closeBtn.onclick = () => { modal.style.display = 'none'; };
+window.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
 
-  // Modal elements
-  const modal = document.getElementById('spritesModal');
-  const closeBtn = document.getElementById('closeModal');
-  const popupSpritesContainer = document.getElementById('popupSprites');
-  const popupShinySpritesContainer = document.getElementById('popupShinySprites');
-  const pokemonNameHeader = document.getElementById('pokemonName');
+function openSpritesModal(pokemonName, spriteFiles, shinyFiles) {
+  document.getElementById('pokemonName').textContent = pokemonName;
 
-  // Function to open modal with sprites
-  window.openSpritesModal = (pokemonName, spriteFilenames, shinyFilenames) => {
-    // Set Pokémon name
-    pokemonNameHeader.textContent = pokemonName;
+  // Clear previous sprites
+  document.getElementById('popupSprites').innerHTML = '';
+  document.getElementById('popupShinySprites').innerHTML = '';
 
-    // Clear previous sprites
-    popupSpritesContainer.innerHTML = '';
-    popupShinySpritesContainer.innerHTML = '';
-
-    // Add sprites
-    spriteFilenames.forEach(filename => {
-      const img = document.createElement('img');
-      img.src = `assets/sprites/${filename}`;
-      img.alt = pokemonName + ' sprite';
-      popupSpritesContainer.appendChild(img);
-    });
-
-    // Add shiny sprites
-    shinyFilenames.forEach(filename => {
-      const img = document.createElement('img');
-      img.src = `assets/shiny_sprites/${filename}`;
-      img.alt = pokemonName + ' shiny sprite';
-      popupShinySpritesContainer.appendChild(img);
-    });
-
-    // Show modal
-    modal.style.display = 'block';
-  };
-
-  // Close modal
-  closeBtn.onclick = () => {
-    modal.style.display = 'none';
-  };
-  window.onclick = (event) => {
-    if (event.target == modal) {
-      modal.style.display = 'none';
-    }
-  };
-
-  // Attach click events to Pokémon names
-  document.querySelectorAll('.pokemon-name').forEach(elem => {
-    elem.addEventListener('click', () => {
-      const name = elem.dataset.name;
-      const spriteFiles = JSON.parse(elem.dataset.sprites);
-      const shinyFiles = JSON.parse(elem.dataset.shiny);
-      window.openSpritesModal(name, spriteFiles, shinyFiles);
-    });
+  // Add sprites
+  spriteFiles.forEach(filename => {
+    const img = document.createElement('img');
+    img.src = `assets/sprites/${filename}`;
+    img.alt = pokemonName + ' sprite';
+    document.getElementById('popupSprites').appendChild(img);
   });
+  shinyFiles.forEach(filename => {
+    const img = document.createElement('img');
+    img.src = `assets/shiny_sprites/${filename}`;
+    img.alt = pokemonName + ' shiny sprite';
+    document.getElementById('popupShinySprites').appendChild(img);
+  });
+
+  // Show modal
+  modal.style.display = 'block';
+}
+
+// Initialize default view
+window.addEventListener('DOMContentLoaded', () => {
+  // Load the Pokémon list for the Pokémon tab
+  loadAndDisplayPokemonList();
+
+  // Activate Pokémon tab by default
+  document.querySelector('.tab-button[data-tab="pokemon"]').click();
 });

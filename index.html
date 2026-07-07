@@ -4,15 +4,14 @@
   <meta charset="UTF-8" />
   <title>Pokémon Sprites Gallery</title>
   <link rel="stylesheet" href="style.css" />
-  <!-- Make sure to include your script before closing body -->
 </head>
 <body>
-  <!-- Header with a golden parallelogram -->
+  <!-- Header -->
   <header>
     <h1>Pokémon Information Hub</h1>
   </header>
 
-  <!-- Tabs navigation -->
+  <!-- Tabs -->
   <div class="tabs">
     <button class="tab-button active" data-tab="challenges">Challenges</button>
     <button class="tab-button" data-tab="pokemon">Pokémon</button>
@@ -20,40 +19,26 @@
     <button class="tab-button" data-tab="typechart">Type Chart</button>
   </div>
 
-  <!-- Challenges Section -->
+  <!-- Challenges -->
   <div class="tab-content" id="challenges" style="display: block;">
     <h2>Challenges</h2>
     <p>Here you can describe challenges or leave it as a placeholder.</p>
   </div>
 
-  <!-- Pokémon Section with Search and Sprites Gallery -->
+  <!-- Pokémon -->
   <div class="tab-content" id="pokemon">
     <h2>Pokémon</h2>
-    <!-- Search Box -->
-    <input type="text" id="searchInput" placeholder="Search Pokémon..." />
-
-    <!-- Container for sprite sections side by side -->
-    <div class="sprite-sections">
-      <!-- Regular Sprites Box -->
-      <div class="sprite-box">
-        <h3 style="text-align:center;">Sprites</h3>
-        <div id="sprites-gallery" class="sprites-grid"></div>
-      </div>
-      <!-- Shiny Sprites Box -->
-      <div class="sprite-box">
-        <h3 style="text-align:center;">Shiny Sprites</h3>
-        <div id="shiny-sprites-gallery" class="sprites-grid"></div>
-      </div>
-    </div>
+    <!-- Pokémon list will be generated here -->
+    <div id="pokemon-list-container"></div>
   </div>
 
-  <!-- Sandwiches Section -->
+  <!-- Sandwiches -->
   <div class="tab-content" id="sandwiches">
     <h2>Sandwiches</h2>
     <p>Content about sandwiches or placeholders.</p>
   </div>
 
-  <!-- Type Chart Section -->
+  <!-- Type Chart -->
   <div class="tab-content" id="typechart">
     <h2>Type Chart</h2>
     <p>Content about Pokémon types or placeholders.</p>
@@ -64,12 +49,12 @@
     <div class="modal-content">
       <span class="close-button" id="closeModal">&times;</span>
       <h2 id="pokemonName" style="text-align:center; margin-bottom: 20px; color:#fff;"></h2>
-      <div class="popup-sprites">
-        <div>
-          <h3 style="color:#FFD700;">Sprites</h3>
+      <div class="popup-sprites" style="display:flex; gap:20px;">
+        <div style="flex:1;">
+          <!-- Removed header "Sprites" for cleaner look -->
           <div id="popupSprites" class="sprites-grid"></div>
         </div>
-        <div>
+        <div style="flex:1;">
           <h3 style="color:#FFD700;">Shiny Sprites</h3>
           <div id="popupShinySprites" class="sprites-grid"></div>
         </div>
@@ -77,7 +62,6 @@
     </div>
   </div>
 
-  <!-- Include your JavaScript at the end of body -->
   <script src="script.js"></script>
 </body>
 </html>
