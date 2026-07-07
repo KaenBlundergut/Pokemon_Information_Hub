@@ -29,10 +29,12 @@ async function loadSpritesGallery() {
     const responseSprites = await fetch('assets/sprites.json');
     const spriteFilenames = await responseSprites.json();
 
+    // Get the gallery container
     const gallery = document.getElementById('sprites-gallery');
-    // Clear previous images if any
+    // Clear previous images
     gallery.innerHTML = '';
 
+    // Append images
     spriteFilenames.forEach(filename => {
       const img = document.createElement('img');
       img.src = `assets/sprites/${filename}`;
@@ -45,9 +47,10 @@ async function loadSpritesGallery() {
     const shinyFilenames = await responseShiny.json();
 
     const shinyGallery = document.getElementById('shiny-sprites-gallery');
-    // Clear previous images if any
+    // Clear previous images
     shinyGallery.innerHTML = '';
 
+    // Append shiny images
     shinyFilenames.forEach(filename => {
       const img = document.createElement('img');
       img.src = `assets/shiny_sprites/${filename}`;
@@ -66,3 +69,5 @@ loadSpritesGallery();
 // Initialize default tab
 // Show the Challenges tab by default
 document.querySelector('.tab-button.active').click();
+
+window.addEventListener('DOMContentLoaded', loadSpritesGallery);
