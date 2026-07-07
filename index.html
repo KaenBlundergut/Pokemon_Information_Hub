@@ -1,68 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Pokémon Hub</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pokémon Viewer</title>
+<link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header>
-    <h1>Pokémon Hub</h1>
-  </header>
 
-  <!-- Tabs -->
-  <div class="tabs">
-    <button class="tab-button active" data-tab="challenges">Challenges</button>
-    <button class="tab-button" data-tab="pokemon">Pokémon</button>
-    <button class="tab-button" data-tab="sandwiches">Sandwiches</button>
-    <button class="tab-button" data-tab="typechart">Type Chart</button>
+<header>
+  <h1>Pokémon Viewer</h1>
+</header>
+
+<div class="tabs">
+  <button class="tab-button active" onclick="switchTab('list')">List</button>
+  <button class="tab-button" onclick="switchTab('other')">Other</button>
+</div>
+
+<div id="list" class="tab-content show">
+  <div id="pokemon-list">
+    <!-- Example Pokémon names -->
+    <div class="pokemon-name" onclick="openPopup()">Pikachu</div>
+    <div class="pokemon-name" onclick="openPopup()">Charmander</div>
+    <div class="pokemon-name" onclick="openPopup()">Bulbasaur</div>
   </div>
+</div>
 
-  <!-- Challenges tab -->
-  <div class="tab-content" id="challenges" style="display: block;">
-    <h2>Challenges</h2>
-    <p>Placeholder for challenges.</p>
-  </div>
+<div id="other" class="tab-content">
+  <p>This is another tab content.</p>
+</div>
 
-  <!-- Pokémon tab: only list, search -->
-  <div class="tab-content" id="pokemon">
-    <h2>Pokémon</h2>
-    <!-- Search bar -->
-    <input type="text" id="searchInput" placeholder="Search Pokémon..." />
-
-    <!-- Pokémon list -->
-    <div id="pokemon-list" style="margin-top:20px; display:flex; flex-wrap:wrap; gap:10px;"></div>
-  </div>
-
-  <!-- Sandwiches tab -->
-  <div class="tab-content" id="sandwiches">
-    <h2>Sandwiches</h2>
-    <p>Placeholder content.</p>
-  </div>
-
-  <!-- Type chart tab -->
-  <div class="tab-content" id="typechart">
-    <h2>Type Chart</h2>
-    <p>Placeholder content.</p>
-  </div>
-
-  <!-- Sprite popup modal (sprites only inside here) -->
-<div id="spritesModal" class="modal">
+<!-- Modal for Pokémon sprites -->
+<div id="spritesModal">
   <div class="modal-content">
-    <span class="close" id="closeModal">&times;</span>
-    <h2 id="pokemonName" style="text-align:center; margin-bottom:20px; color:#fff;"></h2>
-    <div style="display:flex; gap:20px; justify-content: center;">
-      <div style="flex:1; display:flex; justify-content: center;">
-        <div id="popupSprites"></div>
-      </div>
-      <div style="flex:1; display:flex; justify-content: center;">
-        <!-- Removed header "Shiny Sprites" -->
-        <div id="popupShinySprites"></div>
-      </div>
+    <button onclick="closePopup()" style="margin-bottom:10px;">Close</button>
+    <div id="popupSprites">
+      <!-- Pokémon sprite images here -->
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" width="80" />
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png" width="80" />
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" width="80" />
+    </div>
+    <div id="popupShinySprites" style="margin-top:10px;">
+      <!-- Shiny Pokémon sprite images -->
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" width="80" />
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png" width="80" />
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" width="80" />
     </div>
   </div>
 </div>
 
-  <script src="script.js"></script>
+<script>
+  // Switch tabs and close popup on tab change
+  function switchTab(tabName) {
+    // Hide all tab content
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('show'));
+    // Show selected tab
+    document.getElementById(tabName).classList.add('show');
+
+    // Close popup when switching tabs
+    closePopup();
+
+    // Update active button styles
+    document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.tab-button').forEach(btn => {
+      if (btn.getAttribute('onclick').includes(tabName)) {
+        btn.classList.add('active');
+      }
+    });
+  }
+
+  function openPopup() {
+    document.getElementById('spritesModal').style.display = 'block';
+  }
+
+  function closePopup() {
+    document.getElementById('spritesModal').style.display = 'none';
+  }
+</script>
+
 </body>
 </html>
