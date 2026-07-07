@@ -67,4 +67,60 @@ window.addEventListener('DOMContentLoaded', () => {
   if (activeTabButton) {
     activeTabButton.click();
   }
+
+  // Modal elements
+  const modal = document.getElementById('spritesModal');
+  const closeBtn = document.getElementById('closeModal');
+  const popupSpritesContainer = document.getElementById('popupSprites');
+  const popupShinySpritesContainer = document.getElementById('popupShinySprites');
+  const pokemonNameHeader = document.getElementById('pokemonName');
+
+  // Function to open modal with sprites
+  window.openSpritesModal = (pokemonName, spriteFilenames, shinyFilenames) => {
+    // Set Pokémon name
+    pokemonNameHeader.textContent = pokemonName;
+
+    // Clear previous sprites
+    popupSpritesContainer.innerHTML = '';
+    popupShinySpritesContainer.innerHTML = '';
+
+    // Add sprites
+    spriteFilenames.forEach(filename => {
+      const img = document.createElement('img');
+      img.src = `assets/sprites/${filename}`;
+      img.alt = pokemonName + ' sprite';
+      popupSpritesContainer.appendChild(img);
+    });
+
+    // Add shiny sprites
+    shinyFilenames.forEach(filename => {
+      const img = document.createElement('img');
+      img.src = `assets/shiny_sprites/${filename}`;
+      img.alt = pokemonName + ' shiny sprite';
+      popupShinySpritesContainer.appendChild(img);
+    });
+
+    // Show modal
+    modal.style.display = 'block';
+  };
+
+  // Close modal
+  closeBtn.onclick = () => {
+    modal.style.display = 'none';
+  };
+  window.onclick = (event) => {
+    if (event.target == modal) {
+      modal.style.display = 'none';
+    }
+  };
+
+  // Attach click events to Pokémon names
+  document.querySelectorAll('.pokemon-name').forEach(elem => {
+    elem.addEventListener('click', () => {
+      const name = elem.dataset.name;
+      const spriteFiles = JSON.parse(elem.dataset.sprites);
+      const shinyFiles = JSON.parse(elem.dataset.shiny);
+      window.openSpritesModal(name, spriteFiles, shinyFiles);
+    });
+  });
 });

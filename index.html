@@ -8,7 +8,7 @@
 <body>
   <!-- Header with a golden parallelogram -->
   <header>
-    <h1>Pokémon Sprites</h1>
+    <h1>Pokémon Information Hub</h1>
   </header>
 
   <!-- Tabs navigation -->
@@ -56,6 +56,24 @@
   <div class="tab-content" id="typechart">
     <h2>Type Chart</h2>
     <p>Content about Pokémon types or placeholders.</p>
+  </div>
+
+  <!-- Modal for sprites popup -->
+  <div id="spritesModal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" id="closeModal">&times;</span>
+      <h2 id="pokemonName" style="text-align:center; margin-bottom: 20px; color:#fff;"></h2>
+      <div class="popup-sprites">
+        <div>
+          <h3 style="color:#FFD700;">Sprites</h3>
+          <div id="popupSprites" class="sprites-grid"></div>
+        </div>
+        <div>
+          <h3 style="color:#FFD700;">Shiny Sprites</h3>
+          <div id="popupShinySprites" class="sprites-grid"></div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="script.js"></script>
