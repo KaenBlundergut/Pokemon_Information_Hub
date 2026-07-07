@@ -30,6 +30,20 @@
     <h2>Pokémon</h2>
     <!-- Pokémon list will be generated here -->
     <div id="pokemon-list-container"></div>
+
+    <!-- Sprite galleries for all Pokémon (loaded once) -->
+    <div class="sprite-sections" style="margin-top:30px;">
+      <!-- Regular Sprites -->
+      <div class="sprite-box" style="margin-bottom:20px;">
+        <h3 style="text-align:center;">Sprites</h3>
+        <div id="sprites-gallery" class="sprites-grid"></div>
+      </div>
+      <!-- Shiny Sprites -->
+      <div class="sprite-box">
+        <h3 style="text-align:center;">Shiny Sprites</h3>
+        <div id="shiny-sprites-gallery" class="sprites-grid"></div>
+      </div>
+    </div>
   </div>
 
   <!-- Sandwiches -->
@@ -51,7 +65,7 @@
       <h2 id="pokemonName" style="text-align:center; margin-bottom: 20px; color:#fff;"></h2>
       <div class="popup-sprites" style="display:flex; gap:20px;">
         <div style="flex:1;">
-          <!-- Removed header "Sprites" for cleaner look -->
+          <!-- Removed the "Sprites" header for cleaner look -->
           <div id="popupSprites" class="sprites-grid"></div>
         </div>
         <div style="flex:1;">

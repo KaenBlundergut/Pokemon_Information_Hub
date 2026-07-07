@@ -40,6 +40,45 @@ async function loadAndDisplayPokemonList() {
   }
 }
 
+// Load sprite galleries (all Pokémon sprites)
+async function loadSpritesGallery() {
+  try {
+    const responseSprites = await fetch('assets/sprites.json');
+    const spriteFilenames = await responseSprites.json();
+
+    const gallery = document.getElementById('sprites-gallery');
+    if (gallery) {
+      gallery.innerHTML = '';
+      spriteFilenames.forEach(filename => {
+        const img = document.createElement('img');
+        img.src = `assets/sprites/${filename}`;
+        img.alt = filename;
+        gallery.appendChild(img);
+      });
+    } else {
+      console.error('Element with ID "sprites-gallery" not found.');
+    }
+
+    const responseShiny = await fetch('assets/shiny_sprites.json');
+    const shinyFilenames = await responseShiny.json();
+
+    const shinyGallery = document.getElementById('shiny-sprites-gallery');
+    if (shinyGallery) {
+      shinyGallery.innerHTML = '';
+      shinyFilenames.forEach(filename => {
+        const img = document.createElement('img');
+        img.src = `assets/shiny_sprites/${filename}`;
+        img.alt = filename;
+        shinyGallery.appendChild(img);
+      });
+    } else {
+      console.error('Element with ID "shiny-sprites-gallery" not found.');
+    }
+  } catch (error) {
+    console.error('Error loading sprite galleries:', error);
+  }
+}
+
 // Modal handling
 const modal = document.getElementById('spritesModal');
 const closeBtn = document.getElementById('closeModal');
@@ -58,13 +97,13 @@ function openSpritesModal(pokemonName, spriteFiles, shinyFiles) {
   spriteFiles.forEach(filename => {
     const img = document.createElement('img');
     img.src = `assets/sprites/${filename}`;
-    img.alt = pokemonName + ' sprite';
+    img.alt = `${pokemonName} sprite`;
     document.getElementById('popupSprites').appendChild(img);
   });
   shinyFiles.forEach(filename => {
     const img = document.createElement('img');
     img.src = `assets/shiny_sprites/${filename}`;
-    img.alt = pokemonName + ' shiny sprite';
+    img.alt = `${pokemonName} shiny sprite`;
     document.getElementById('popupShinySprites').appendChild(img);
   });
 
@@ -72,9 +111,9 @@ function openSpritesModal(pokemonName, spriteFiles, shinyFiles) {
   modal.style.display = 'block';
 }
 
-// Initialize default view
+// Initialize on page load
 window.addEventListener('DOMContentLoaded', () => {
-  // Load the Pokémon list for the Pokémon tab
+  loadSpritesGallery();
   loadAndDisplayPokemonList();
 
   // Activate Pokémon tab by default
