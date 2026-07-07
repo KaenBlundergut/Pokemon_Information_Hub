@@ -120,12 +120,6 @@ header h1 {
   cursor: pointer;
   margin-bottom: 10px;
 }
-#popupSprites,
-#popupShinySprites {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
 
 /* Modal styles */
 .modal {
@@ -154,4 +148,32 @@ header h1 {
 }
 .close:hover {
   color: #FFD700;
+}
+
+/* Style for the popup box to be hexagon-shaped with a yellow border */
+#spritesModal .modal-content {
+  border: 4px solid yellow; /* Yellow border */
+  clip-path: polygon(
+    25% 6.7%,
+    75% 6.7%,
+    100% 50%,
+    75% 93.3%,
+    25% 93.3%,
+    0% 50%
+  );
+  /* Optional: To smooth the edges, you can add border-radius or shadow */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Center the sprite images container */
+#popupSprites,
+#popupShinySprites {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Center all images horizontally */
+  gap: 10px;
+  margin-top: 10px;
 }
