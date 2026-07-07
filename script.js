@@ -25,39 +25,37 @@ document.addEventListener("DOMContentLoaded", () => {
     populatePokedex();
   });
 
-  // Group Pokémon with parentheses for merging
-  let groupedPokemon = {};
-  function groupPokemon() {
-    groupedPokemon = {};
-    pokemonData.forEach(p => {
-      let baseName = p.name;
-      // Remove parentheses and their content for grouping
-      const nameWithoutParentheses = baseName.replace(/\s*\(.*?\)\s*/g, '').trim();
-      if (!groupedPokemon[nameWithoutParentheses]) {
-        groupedPokemon[nameWithoutParentheses] = [];
-      }
-      groupedPokemon[nameWithoutParentheses].push(p);
-    });
-  }
+// Group Pokémon
+function groupPokemon() {
+  groupedPokemon = {};
+  pokemonData.forEach(p => {
+    const baseName = p.name.replace(/\s*\(.*?\)\s*/g, '').trim();
+    if (!groupedPokemon[baseName]) {
+      groupedPokemon[baseName] = [];
+    }
+    groupedPokemon[baseName].push(p);
+  });
+}
 
-  // Populate Pokedex list
-  function populatePokedex() {
-    const searchInput = document.getElementById('searchBar');
-    searchInput.value = '';
-    renderPokemonList(Object.keys(groupedPokemon));
-  }
+// Populate Pokedex
+function populatePokedex() {
+  groupPokemon();
+  document.getElementById('searchBar').value = '';
+  renderPokemonList(Object.keys(groupedPokemon));
+}
 
-  // Render list based on filter
-  function renderPokemonList(names) {
-    pokemonList.innerHTML = '';
-    names.forEach(name => {
-      const box = document.createElement('div');
-      box.className = 'pokemon-box';
-      box.textContent = name;
-      box.addEventListener('click', () => showPokemonGroup(name));
-      pokemonList.appendChild(box);
-    });
-  }
+// Render list
+function renderPokemonList(names) {
+  const listContainer = document.getElementById('pokemonList');
+  listContainer.innerHTML = '';
+  names.forEach(name => {
+    const box = document.createElement('div');
+    box.className = 'pokemon-box';
+    box.textContent = name;
+    box.addEventListener('click', () => showPokemonGroup(name));
+    listContainer.appendChild(box);
+  });
+}
 
   // Show all sprites for a group
   function showPokemonGroup(name) {
