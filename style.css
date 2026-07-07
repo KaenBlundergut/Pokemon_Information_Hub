@@ -83,7 +83,7 @@ header h1 {
   background-color: #666;
 }
 
-/* Style for the popup modal to be a custom, upright hexagon with yellow border */
+/* Style for the popup modal to be a more vertical, upright hexagon with a yellow border and background */
 #spritesModal .modal-content {
   position: relative;
   background-color: transparent; /* transparent, shape defines the shape */
@@ -105,6 +105,11 @@ header h1 {
   flex-direction: column;
   align-items: center;
   justify-content: start;
+  /* Ensure it's above other elements */
+  z-index: 1000;
+  position: relative; /* so z-index works */
+  /* Add a background inside the shape to match style */
+  background-color: #222; /* or your preferred background color */
 }
 
 /* Center the sprites inside the popup, no distortions */
