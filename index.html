@@ -2,43 +2,47 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Pokémon Viewer</title>
-<link rel="stylesheet" href="styles.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pokemon Information Hub</title>
+<link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <header>
+    <h1>Pokemon Information Hub</h1>
+    <div class="header-buttons">
+      <button class="small-button" id="aboutBtn">About</button>
+      <button class="small-button" id="feedbackBtn">Feedback</button>
+      <button class="small-button" id="donateBtn">Donate</button>
+    </div>
+  </header>
 
-<header>
-  <h1>Pokémon Viewer</h1>
-</header>
+  <nav>
+    <button class="main-button" data-tab="challenges">Challenges</button>
+    <button class="main-button" data-tab="pokedex">Pokedex</button>
+    <button class="main-button" data-tab="sandwich">Sandwich</button>
+    <button class="main-button" data-tab="typechart">Type Chart</button>
+  </nav>
 
-<div class="tabs">
-  <button class="tab-button active" data-tab="list" onclick="switchTab('list')">List</button>
-  <button class="tab-button" data-tab="other" onclick="switchTab('other')">Other</button>
-</div>
+  <main>
+    <section id="challenges" class="tab-content"></section>
+    <section id="pokedex" class="tab-content hidden">
+      <div class="pokedex-container" id="pokemonList"></div>
+    </section>
+    <section id="sandwich" class="tab-content"></section>
+    <section id="typechart" class="tab-content"></section>
+  </main>
 
-<div id="list" class="tab-content show">
-  <div id="pokemon-list">
-    <!-- Example Pokémon names -->
-    <div class="pokemon-name" onclick="openPopup()">Pikachu</div>
-    <div class="pokemon-name" onclick="openPopup()">Charmander</div>
-    <div class="pokemon-name" onclick="openPopup()">Bulbasaur</div>
+  <!-- Popup for Pokémon details -->
+  <div id="popup" class="popup hidden">
+    <div class="popup-content">
+      <span class="close-btn" id="closePopup">&times;</span>
+      <h2 id="pokemonName"></h2>
+      <div class="sprites-container">
+        <img id="sprite" src="" alt="Sprite" />
+        <img id="shinySprite" src="" alt="Shiny Sprite" />
+      </div>
+    </div>
   </div>
-</div>
-
-<div id="other" class="tab-content">
-  <p>This is another tab content.</p>
-</div>
-
-<!-- Modal for Pokémon sprites -->
-<div id="spritesModal">
-  <div class="modal-content">
-    <button onclick="closePopup()" style="margin-bottom:10px;">Close</button>
-    <h2 id="pokemonName"></h2>
-    <div id="popupSprites"></div>
-    <div id="popupShinySprites" style="margin-top:10px;"></div>
-  </div>
-</div>
 
 <script src="script.js"></script>
 </body>
