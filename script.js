@@ -17,7 +17,7 @@ document.querySelectorAll('.tab-button').forEach(btn => {
 // Load Pokémon data and display list and hexagons
 async function loadAndDisplayPokemon() {
   try {
-    const response = await fetch('assets/pokemonData.json'); // Correct path
+    const response = await fetch('assets/pokemonData.json'); // Ensure path is correct
     const data = await response.json();
 
     window.pokemonData = data;
@@ -84,9 +84,9 @@ document.getElementById('searchInput').addEventListener('input', () => {
     };
     container.appendChild(div);
   });
-});
+}
 
-// Load sprite galleries (reference, optional)
+// Load sprite galleries (reference, optional) - no sprites outside modal
 async function loadSpriteGalleries() {
   try {
     const respSprites = await fetch('assets/sprites.json');
@@ -156,9 +156,9 @@ function openSpritePopup(name, sprites, shinies) {
   modal.style.display = 'block';
 }
 
-// Initialize on DOM load
+// Initialize when DOM is ready
 window.addEventListener('DOMContentLoaded', () => {
   loadAndDisplayPokemon();
-  loadSpriteGalleries(); // optional for reference
+  loadSpriteGalleries(); // optional
   document.querySelector('.tab-button[data-tab="pokemon"]').click();
 });

@@ -110,7 +110,7 @@ header h1 {
   transform: scale(1.05);
 }
 
-/* Sprite images in popup */
+/* Sprite images in popup only (no sprites outside) */
 #popupSprites img,
 #popupShinySprites img {
   width: 120px;
