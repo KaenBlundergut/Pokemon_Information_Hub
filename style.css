@@ -1,21 +1,17 @@
-/* Reset styles */
+/* Reset and body background pattern */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
-/* Body styling with background pattern */
 body {
   font-family: Arial, sans-serif;
   background-color: #000;
-  background-image: 
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='70' height='60'><polygon points='35,0 70,15 70,45 35,60 0,45 0,15' fill='%23333333' stroke='%23000000' stroke-width='2'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='70' height='60'><polygon points='35,0 70,15 70,45 35,60 0,45 0,15' fill='%23333333' stroke='%23000000' stroke-width='2'/></svg>");
   background-repeat: repeat;
   background-size: 70px 60px;
   padding: 20px;
   color: #fff;
-  line-height: 1.4;
 }
 
 /* Header styling */
@@ -37,7 +33,6 @@ header h1 {
 .tabs {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
   margin-bottom: 20px;
 }
 .tab-button {
@@ -49,14 +44,11 @@ header h1 {
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
-  font-size: 1em;
-  transition: background-color 0.3s, color 0.3s, transform 0.2s;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: all 0.3s;
 }
 .tab-button:hover,
 .tab-button.active {
   background-color: #FFC107;
-  color: #000;
   transform: scale(1.05);
 }
 
@@ -68,14 +60,14 @@ header h1 {
   border-radius: 8px;
   border: 2px solid #444;
   max-width: 1200px;
-  margin: 0 auto 30px auto;
+  margin: 0 auto 30px;
 }
 .show {
   display: block;
 }
 
-/* Pokémon name styles (clickable) */
-#pokemon-list-container {
+/* Pokémon names styles */
+#pokemon-list {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -91,27 +83,51 @@ header h1 {
   background-color: #666;
 }
 
-/* Sprite grid styles */
-.sprites-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-.sprites-grid img {
+/* Hexagon shape with CSS clip-path */
+.hexagon {
   width: 120px;
-  height: auto;
+  height: 104px;
+  background-color: #444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  clip-path: polygon(
+    25% 6.7%,
+    75% 6.7%,
+    100% 50%,
+    75% 93.3%,
+    25% 93.3%,
+    0% 50%
+  );
+  transition: background-color 0.2s, transform 0.2s;
+}
+.hexagon:hover {
+  background-color: #666;
+  transform: scale(1.05);
+}
+
+/* Sprite images in popup */
+#popupSprites img,
+#popupShinySprites img {
+  width: 120px;
   border: 3px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.4);
   cursor: pointer;
-  transition: transform 0.2s, border-color 0.2s;
+  margin-bottom: 10px;
 }
-.sprites-grid img:hover {
-  transform: scale(1.1);
-  border-color: #007bff;
+#popupSprites,
+#popupShinySprites {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-/* Modal styles */
+/* Modal styling */
 .modal {
   display: none;
   position: fixed;
@@ -130,12 +146,12 @@ header h1 {
   max-width: 900px;
   position: relative;
 }
-.close-button {
+.close {
   position: absolute;
   top: 10px; right: 20px;
   font-size: 2em; color: #fff;
   cursor: pointer;
 }
-.close-button:hover {
+.close:hover {
   color: #FFD700;
 }

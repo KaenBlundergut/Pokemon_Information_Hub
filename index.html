@@ -2,13 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Pokémon Sprites Gallery</title>
+  <title>Pokémon Hub</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Header -->
   <header>
-    <h1>Pokémon Information Hub</h1>
+    <h1>Pokémon Hub</h1>
   </header>
 
   <!-- Tabs -->
@@ -22,7 +21,7 @@
   <!-- Challenges -->
   <div class="tab-content" id="challenges" style="display: block;">
     <h2>Challenges</h2>
-    <p>Here you can describe challenges or leave it as a placeholder.</p>
+    <p>Placeholder for challenges.</p>
   </div>
 
   <!-- Pokémon -->
@@ -32,34 +31,35 @@
     <input type="text" id="searchInput" placeholder="Search Pokémon..." />
 
     <!-- Pokémon list -->
-    <div id="pokemon-list-container" style="margin-top:20px;"></div>
+    <div id="pokemon-list" style="margin-top:20px; display:flex; flex-wrap:wrap; gap:10px;"></div>
+
+    <!-- Hexagon buttons -->
+    <h3 style="margin-top:30px;">Select Pokémon</h3>
+    <div id="hexagon-container" style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:10px;"></div>
   </div>
 
-  <!-- Sandwiches -->
+  <!-- Other tabs -->
   <div class="tab-content" id="sandwiches">
     <h2>Sandwiches</h2>
-    <p>Content about sandwiches or placeholders.</p>
+    <p>Placeholder content.</p>
   </div>
-
-  <!-- Type Chart -->
   <div class="tab-content" id="typechart">
     <h2>Type Chart</h2>
-    <p>Content about Pokémon types or placeholders.</p>
+    <p>Placeholder content.</p>
   </div>
 
   <!-- Modal for sprite popup -->
   <div id="spritesModal" class="modal">
     <div class="modal-content">
-      <span class="close-button" id="closeModal">&times;</span>
-      <h2 id="pokemonName" style="text-align:center; margin-bottom: 20px; color:#fff;"></h2>
-      <div class="popup-sprites" style="display:flex; gap:20px;">
+      <span class="close" id="closeModal">&times;</span>
+      <h2 id="pokemonName" style="text-align:center; margin-bottom:20px; color:#fff;"></h2>
+      <div style="display:flex; gap:20px;">
         <div style="flex:1;">
-          <!-- Removed the "Sprites" header for cleaner look -->
-          <div id="popupSprites" class="sprites-grid"></div>
+          <div id="popupSprites"></div>
         </div>
         <div style="flex:1;">
           <h3 style="color:#FFD700;">Shiny Sprites</h3>
-          <div id="popupShinySprites" class="sprites-grid"></div>
+          <div id="popupShinySprites"></div>
         </div>
       </div>
     </div>
