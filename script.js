@@ -1,49 +1,38 @@
 // Handle tab switching
 document.querySelectorAll('.tab-button').forEach(button => {
   button.addEventListener('click', () => {
+    // Remove active class from all buttons
     document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+    // Add active class to clicked button
     button.classList.add('active');
 
     const target = button.dataset.tab;
 
+    // Hide all tab contents
     document.querySelectorAll('.tab-content').forEach(content => {
       content.style.display = 'none';
     });
+    // Show the selected tab content
     document.getElementById(target).style.display = 'block';
 
-    // If Pokémon tab is activated, initialize Pokémon display
+    // If Pokémon tab is opened, load sprites (optional, only load once)
     if (target === 'pokemon') {
-      displayPokemons(); // your existing Pokémon display function
+      loadSpritesGallery();
     }
   });
-});
-
-// List of Pokémon IDs to display
-const pokemonIds = [1, 2, 3, 29, 150]; // Add your Pokémon IDs here
-let allPokemons = []; // To store all Pokémon data
-
-const container = document.getElementById('pokemon-container');
-const searchInput = document.getElementById('searchInput');
-
-// Function to display Pokémon based on filter
-function displayPokemons(filter = '') {
-  // Your existing Pokémon display code (if any)
-}
-
-// Event listener for search box
-searchInput.addEventListener('input', () => {
-  const filter = searchInput.value.toLowerCase();
-  displayPokemons(filter);
 });
 
 // Load and display sprites from JSON files
 async function loadSpritesGallery() {
   try {
-    // Load regular sprites
+    // Load regular sprites filenames
     const responseSprites = await fetch('assets/sprites.json');
     const spriteFilenames = await responseSprites.json();
 
     const gallery = document.getElementById('sprites-gallery');
+    // Clear previous images if any
+    gallery.innerHTML = '';
+
     spriteFilenames.forEach(filename => {
       const img = document.createElement('img');
       img.src = `assets/sprites/${filename}`;
@@ -51,11 +40,14 @@ async function loadSpritesGallery() {
       gallery.appendChild(img);
     });
 
-    // Load shiny sprites
+    // Load shiny sprites filenames
     const responseShiny = await fetch('assets/shiny_sprites.json');
     const shinyFilenames = await responseShiny.json();
 
     const shinyGallery = document.getElementById('shiny-sprites-gallery');
+    // Clear previous images if any
+    shinyGallery.innerHTML = '';
+
     shinyFilenames.forEach(filename => {
       const img = document.createElement('img');
       img.src = `assets/shiny_sprites/${filename}`;
@@ -67,5 +59,10 @@ async function loadSpritesGallery() {
   }
 }
 
-// Call this function after page loads
+// Automatically load sprites when page loads
+// (Optional: only load once, or load on tab click)
 loadSpritesGallery();
+
+// Initialize default tab
+// Show the Challenges tab by default
+document.querySelector('.tab-button.active').click();
