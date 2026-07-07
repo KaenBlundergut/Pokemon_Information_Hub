@@ -106,6 +106,8 @@ function renderPokemonList(names) {
 tabs.forEach(btn => {
   btn.addEventListener('click', () => {
     const targetId = btn.getAttribute('data-tab');
+    console.log('Clicked tab:', targetId); // Debug line
+    // existing toggle code...
     // Show the target tab and hide others
     tabContents.forEach(tc => {
       if (tc.id === targetId) {
