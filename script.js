@@ -1,11 +1,10 @@
-// Switch tabs and close popup on tab change
 function switchTab(tabName) {
-  // Hide all tab content
+  // Hide all tab contents
   document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('show'));
   // Show selected tab
   document.getElementById(tabName).classList.add('show');
 
-  // Close popup when switching tabs
+  // Close the popup when switching tabs
   closePopup();
 
   // Update active button styles
@@ -17,12 +16,10 @@ function switchTab(tabName) {
   });
 }
 
-// Open popup
 function openPopup() {
   document.getElementById('spritesModal').style.display = 'block';
 }
 
-// Close popup
 function closePopup() {
   document.getElementById('spritesModal').style.display = 'none';
 }

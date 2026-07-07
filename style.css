@@ -83,24 +83,24 @@ header h1 {
   background-color: #666;
 }
 
-/* Style for the popup modal to be a more vertical, upright hexagon with a yellow border and background */
+/* Style for the popup modal to be a vertical hexagon with high z-index */
 #spritesModal {
   display: none; /* Hidden by default */
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
   background-color: rgba(0,0,0,0.5);
-  z-index: 99999; /* below modal shape but above everything else */
+  z-index: 99999; /* below modal shape but above all else */
 }
 #spritesModal .modal-content {
   position: relative;
-  background-color: #eee; /* inside color */
-  border: 4px solid #222; /* border color */
+  background-color: #eee;
+  border: 4px solid #222;
   clip-path: polygon(
-    50% 0%,    /* Top center */
+    50% 0%,    /* Top */
     100% 25%, /* Upper right */
     100% 75%, /* Lower right */
-    50% 100%, /* Bottom center */
+    50% 100%, /* Bottom */
     0% 75%,   /* Lower left */
     0% 25%    /* Upper left */
   );
@@ -112,8 +112,7 @@ header h1 {
   flex-direction: column;
   align-items: center;
   justify-content: start;
-  /* Bring to front */
-  z-index: 100000;
+  z-index: 100000; /* on top of overlay */
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 #popupSprites,
