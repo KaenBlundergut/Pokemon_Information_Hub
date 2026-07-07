@@ -150,30 +150,35 @@ header h1 {
   color: #FFD700;
 }
 
-/* Style for the popup box to be hexagon-shaped with a yellow border */
+/* Style for the popup box to be a perfect, upright hexagon with a yellow border */
 #spritesModal .modal-content {
-  border: 4px solid yellow; /* Yellow border */
+  position: relative;
+  background-color: transparent; /* transparent as shape defines the border */
+  border: 4px solid yellow; /* yellow border */
   clip-path: polygon(
-    25% 6.7%,
-    75% 6.7%,
-    100% 50%,
-    75% 93.3%,
-    25% 93.3%,
-    0% 50%
+    25% 0%,   /* Top left */
+    75% 0%,   /* Top right */
+    100% 50%, /* Middle right */
+    75% 100%, /* Bottom right */
+    25% 100%, /* Bottom left */
+    0% 50%   /* Middle left */
   );
-  /* Optional: To smooth the edges, you can add border-radius or shadow */
+  width: 80%; /* or set a fixed width, e.g., 400px */
+  max-width: 600px;
+  margin: 50px auto; /* center on screen with margin */
+  padding: 20px; /* space inside shape */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
 }
 
-/* Center the sprite images container */
+/* Center sprites inside the popup, with flexbox, no distortions */
 #popupSprites,
 #popupShinySprites {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; /* Center all images horizontally */
+  justify-content: center; /* horizontally center images */
   gap: 10px;
   margin-top: 10px;
 }
