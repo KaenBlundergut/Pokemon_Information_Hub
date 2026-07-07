@@ -156,12 +156,12 @@ header h1 {
   background-color: transparent; /* transparent as shape defines the border */
   border: 4px solid yellow; /* yellow border */
   clip-path: polygon(
-    25% 0%,   /* Top left */
-    75% 0%,   /* Top right */
-    100% 50%, /* Middle right */
-    75% 100%, /* Bottom right */
-    25% 100%, /* Bottom left */
-    0% 50%   /* Middle left */
+    50% 0%,   /* Top left */
+    100% 25%,   /* Top right */
+    100% 75%, /* Middle right */
+    50% 100%, /* Bottom right */
+    0% 75%, /* Bottom left */
+    0% 25%   /* Middle left */
   );
   width: 80%; /* or set a fixed width, e.g., 400px */
   max-width: 600px;
