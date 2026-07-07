@@ -17,7 +17,7 @@ document.querySelectorAll('.tab-button').forEach(btn => {
 // Load Pokémon data and display list and hexagons
 async function loadAndDisplayPokemon() {
   try {
-    const response = await fetch('assets/pokemonData.json'); // Corrected path
+    const response = await fetch('assets/pokemonData.json'); // Correct path
     const data = await response.json();
 
     window.pokemonData = data;
@@ -39,7 +39,7 @@ async function loadAndDisplayPokemon() {
       listContainer.appendChild(div);
     });
 
-    // Generate hexagons
+    // Generate hexagon buttons
     generateHexagons();
 
   } catch (err) {
@@ -89,15 +89,13 @@ document.getElementById('searchInput').addEventListener('input', () => {
 // Load sprite galleries (reference, optional)
 async function loadSpriteGalleries() {
   try {
-    // Fetch list of sprite filenames for reference gallery
-    const responseSprites = await fetch('assets/sprites.json');
-    const spriteFilenames = await responseSprites.json();
+    const respSprites = await fetch('assets/sprites.json');
+    const spritesList = await respSprites.json();
 
-    // Create and populate the reference sprite gallery
     const gallery = document.createElement('div');
     gallery.id = 'sprites-gallery';
 
-    spriteFilenames.forEach(filename => {
+    spritesList.forEach(filename => {
       const img = document.createElement('img');
       img.src = `assets/sprites/${filename}`;
       img.alt = filename;
@@ -105,10 +103,8 @@ async function loadSpriteGalleries() {
     });
     document.body.appendChild(gallery);
 
-    // Fetch list of shiny sprite filenames for reference gallery
-    const responseShiny = await fetch('assets/shiny_sprites.json');
-    const shinyFilenames = await responseShiny.json();
-
+    const respShiny = await fetch('assets/shiny_sprites.json');
+    const shinyFilenames = await respShiny.json();
     const shinyGallery = document.createElement('div');
     shinyGallery.id = 'shiny-sprites-gallery';
 
@@ -119,7 +115,6 @@ async function loadSpriteGalleries() {
       shinyGallery.appendChild(img);
     });
     document.body.appendChild(shinyGallery);
-
   } catch (err) {
     console.error('Error loading sprite galleries:', err);
   }
@@ -161,7 +156,7 @@ function openSpritePopup(name, sprites, shinies) {
   modal.style.display = 'block';
 }
 
-// Initialize on page load
+// Initialize on DOM load
 window.addEventListener('DOMContentLoaded', () => {
   loadAndDisplayPokemon();
   loadSpriteGalleries(); // optional for reference

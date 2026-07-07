@@ -1,4 +1,4 @@
-/* Reset and body background pattern */
+/* Reset and background pattern */
 * {
   margin: 0;
   padding: 0;
@@ -86,7 +86,7 @@ header h1 {
 /* Hexagon shape with CSS clip-path */
 .hexagon {
   width: 120px;
-  height: 104px;
+  height: 104px; /* height based on width for a regular hexagon */
   background-color: #444;
   display: flex;
   align-items: center;
@@ -127,7 +127,7 @@ header h1 {
   gap: 10px;
 }
 
-/* Modal styling */
+/* Modal styles */
 .modal {
   display: none;
   position: fixed;
