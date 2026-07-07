@@ -14,113 +14,67 @@ document.querySelectorAll('.tab-button').forEach(btn => {
   });
 });
 
-// Load Pokémon data and display list and hexagons
+// Load Pokémon data and display list
 async function loadAndDisplayPokemon() {
   try {
-    const response = await fetch('assets/pokemonData.json'); // Ensure path is correct
+    const response = await fetch('assets/pokemonData.json'); // Path to your JSON
     const data = await response.json();
 
-    window.pokemonData = data;
+    // Combine Pokémon with same base name
+    const combinedData = combinePokemonByBaseName(data);
+    window.pokemonData = combinedData;
 
-    // Display Pokémon list
-    const listContainer = document.getElementById('pokemon-list');
-    listContainer.innerHTML = '';
-
-    data.forEach(p => {
-      const div = document.createElement('div');
-      div.className = 'pokemon-name';
-      div.textContent = p.name;
-      div.dataset.name = p.name;
-      div.dataset.sprites = JSON.stringify([p.sprite]);
-      div.dataset.shiny = JSON.stringify([p.shiny]);
-      div.onclick = () => {
-        openSpritePopup(p.name, [p.sprite], [p.shiny]);
-      };
-      listContainer.appendChild(div);
-    });
-
-    // Generate hexagon buttons
-    generateHexagons();
-
+    // Populate list
+    populatePokemonList(combinedData);
   } catch (err) {
     console.error('Error loading Pokémon:', err);
   }
 }
 
-function generateHexagons() {
-  const container = document.getElementById('hexagon-container');
-  container.innerHTML = '';
-  const data = window.pokemonData || [];
-  data.forEach(p => {
-    const hex = document.createElement('div');
-    hex.className = 'hexagon';
-    hex.textContent = p.name;
-    hex.title = 'Click to view sprites';
-    hex.onclick = () => {
-      openSpritePopup(p.name, [p.sprite], [p.shiny]);
-    };
-    container.appendChild(hex);
+function combinePokemonByBaseName(pokemonArray) {
+  const grouped = {};
+
+  pokemonArray.forEach(p => {
+    const baseName = p.name.replace(/\s*\(.*?\)\s*/g, '').trim();
+
+    if (!grouped[baseName]) {
+      grouped[baseName] = {
+        name: baseName,
+        sprites: [],
+        shinies: []
+      };
+    }
+
+    if (p.sprite && !grouped[baseName].sprites.includes(p.sprite)) {
+      grouped[baseName].sprites.push(p.sprite);
+    }
+    if (p.shiny && !grouped[baseName].shinies.includes(p.shiny)) {
+      grouped[baseName].shinies.push(p.shiny);
+    }
   });
+
+  return Object.values(grouped);
 }
 
-// Search filtering
-document.getElementById('searchInput').addEventListener('input', () => {
-  const filter = document.getElementById('searchInput').value.toLowerCase();
-  const data = window.pokemonData || [];
-  const filtered = data.filter(p => p.name.toLowerCase().includes(filter));
-
+function populatePokemonList(data) {
   const container = document.getElementById('pokemon-list');
   container.innerHTML = '';
 
-  filtered.forEach(p => {
+  data.forEach(p => {
     const div = document.createElement('div');
     div.className = 'pokemon-name';
     div.textContent = p.name;
     div.dataset.name = p.name;
-    div.dataset.sprites = JSON.stringify([p.sprite]);
-    div.dataset.shiny = JSON.stringify([p.shiny]);
+    div.dataset.sprites = JSON.stringify(p.sprites);
+    div.dataset.shiny = JSON.stringify(p.shinies);
     div.onclick = () => {
-      openSpritePopup(p.name, [p.sprite], [p.shiny]);
+      openSpritePopup(p.name, p.sprites, p.shinies);
     };
     container.appendChild(div);
   });
 }
 
-// Load sprite galleries (reference, optional) - no sprites outside modal
-async function loadSpriteGalleries() {
-  try {
-    const respSprites = await fetch('assets/sprites.json');
-    const spritesList = await respSprites.json();
-
-    const gallery = document.createElement('div');
-    gallery.id = 'sprites-gallery';
-
-    spritesList.forEach(filename => {
-      const img = document.createElement('img');
-      img.src = `assets/sprites/${filename}`;
-      img.alt = filename;
-      gallery.appendChild(img);
-    });
-    document.body.appendChild(gallery);
-
-    const respShiny = await fetch('assets/shiny_sprites.json');
-    const shinyFilenames = await respShiny.json();
-    const shinyGallery = document.createElement('div');
-    shinyGallery.id = 'shiny-sprites-gallery';
-
-    shinyFilenames.forEach(filename => {
-      const img = document.createElement('img');
-      img.src = `assets/shiny_sprites/${filename}`;
-      img.alt = filename;
-      shinyGallery.appendChild(img);
-    });
-    document.body.appendChild(shinyGallery);
-  } catch (err) {
-    console.error('Error loading sprite galleries:', err);
-  }
-}
-
-// Popup modal functions
+// Popup sprite modal
 const modal = document.getElementById('spritesModal');
 const closeBtn = document.getElementById('closeModal');
 
@@ -132,11 +86,11 @@ function openSpritePopup(name, sprites, shinies) {
   const containerSprites = document.getElementById('popupSprites');
   const containerShinies = document.getElementById('popupShinySprites');
 
-  // Clear previous images
+  // Clear previous sprites
   containerSprites.innerHTML = '';
   containerShinies.innerHTML = '';
 
-  // Add normal sprites
+  // Add sprites
   sprites.forEach(f => {
     const img = document.createElement('img');
     img.src = `assets/sprites/${f}`;
@@ -152,13 +106,11 @@ function openSpritePopup(name, sprites, shinies) {
     containerShinies.appendChild(img);
   });
 
-  // Show modal
   modal.style.display = 'block';
 }
 
-// Initialize when DOM is ready
+// Initialize on DOM content loaded
 window.addEventListener('DOMContentLoaded', () => {
-  loadAndDisplayPokemon();
-  loadSpriteGalleries(); // optional
+  // Only load Pokémon tab initially
   document.querySelector('.tab-button[data-tab="pokemon"]').click();
 });
