@@ -11,7 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let pokemonData = [];
   let shinySprites = [];
   let sprites = [];
-
+  
+  let groupedPokemon = {}; // <-- add this line
+  
   // Load JSON data
   Promise.all([
     fetch('assets/pokemonData.json').then(res => res.json()),
