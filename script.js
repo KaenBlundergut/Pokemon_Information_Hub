@@ -63,7 +63,7 @@ function generateHexagons() {
   });
 }
 
-// Search filter
+// Search filtering
 document.getElementById('searchInput').addEventListener('input', () => {
   const filter = document.getElementById('searchInput').value.toLowerCase();
   const data = window.pokemonData || [];

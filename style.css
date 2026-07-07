@@ -86,7 +86,7 @@ header h1 {
 /* Hexagon shape with CSS clip-path */
 .hexagon {
   width: 120px;
-  height: 104px; /* height based on width for a regular hexagon */
+  height: 104px;
   background-color: #444;
   display: flex;
   align-items: center;
