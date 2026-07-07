@@ -66,7 +66,7 @@ header h1 {
   display: block;
 }
 
-/* Pokémon list styles */
+/* Pokémon names styles */
 #pokemon-list {
   display: flex;
   flex-wrap: wrap;
@@ -83,17 +83,15 @@ header h1 {
   background-color: #666;
 }
 
-/* Modal overlay */
+/* Style for the popup modal to be a more vertical, upright hexagon with a yellow border and background */
 #spritesModal {
   display: none; /* Hidden by default */
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
   background-color: rgba(0,0,0,0.5);
-  z-index: 99999; /* Below modal shape but above everything else */
+  z-index: 99999; /* below modal shape but above everything else */
 }
-
-/* Modal shape (the hexagon) */
 #spritesModal .modal-content {
   position: relative;
   background-color: #eee; /* inside color */
@@ -114,11 +112,10 @@ header h1 {
   flex-direction: column;
   align-items: center;
   justify-content: start;
+  /* Bring to front */
+  z-index: 100000;
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
-  z-index: 100000; /* Ensure it’s on top of overlay */
 }
-
-/* Center sprites inside modal */
 #popupSprites,
 #popupShinySprites {
   display: flex;

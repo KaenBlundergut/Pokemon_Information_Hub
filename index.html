@@ -13,13 +13,13 @@
 </header>
 
 <div class="tabs">
-  <button class="tab-button active" onclick="switchTab('list')">List</button>
-  <button class="tab-button" onclick="switchTab('other')">Other</button>
+  <button class="tab-button active" data-tab="list" onclick="switchTab('list')">List</button>
+  <button class="tab-button" data-tab="other" onclick="switchTab('other')">Other</button>
 </div>
 
 <div id="list" class="tab-content show">
   <div id="pokemon-list">
-    <!-- Example Pokémon names -->
+    <!-- Pokémon names -->
     <div class="pokemon-name" onclick="openPopup()">Pikachu</div>
     <div class="pokemon-name" onclick="openPopup()">Charmander</div>
     <div class="pokemon-name" onclick="openPopup()">Bulbasaur</div>
@@ -34,49 +34,12 @@
 <div id="spritesModal">
   <div class="modal-content">
     <button onclick="closePopup()" style="margin-bottom:10px;">Close</button>
-    <div id="popupSprites">
-      <!-- Pokémon sprite images here -->
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" width="80" />
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png" width="80" />
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" width="80" />
-    </div>
-    <div id="popupShinySprites" style="margin-top:10px;">
-      <!-- Shiny Pokémon sprite images -->
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" width="80" />
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png" width="80" />
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" width="80" />
-    </div>
+    <h2 id="pokemonName"></h2>
+    <div id="popupSprites"></div>
+    <div id="popupShinySprites" style="margin-top:10px;"></div>
   </div>
 </div>
 
-<script>
-  // Switch tabs and close popup on tab change
-  function switchTab(tabName) {
-    // Hide all tab content
-    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('show'));
-    // Show selected tab
-    document.getElementById(tabName).classList.add('show');
-
-    // Close popup when switching tabs
-    closePopup();
-
-    // Update active button styles
-    document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-    document.querySelectorAll('.tab-button').forEach(btn => {
-      if (btn.getAttribute('onclick').includes(tabName)) {
-        btn.classList.add('active');
-      }
-    });
-  }
-
-  function openPopup() {
-    document.getElementById('spritesModal').style.display = 'block';
-  }
-
-  function closePopup() {
-    document.getElementById('spritesModal').style.display = 'none';
-  }
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
