@@ -100,21 +100,23 @@ function renderPokemonList(names) {
     renderPokemonList(filteredNames);
   });
 
-  // Tab switching
-  const tabButtons = document.querySelectorAll('.main-button');
-  tabButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const target = btn.dataset.tab;
-      tabContents.forEach(tc => {
-        tc.classList.toggle('hidden', tc.id !== target);
-        if (target === 'pokedex') {
-          // When switching to Pokedex, refresh list
-          groupPokemon();
-          populatePokedex();
-        }
-      });
+// Tab switching
+const tabButtons = document.querySelectorAll('.main-button');
+const tabContents = document.querySelectorAll('.tab-content');
+
+tabButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.tab;
+    tabContents.forEach(tc => {
+      tc.classList.toggle('hidden', tc.id !== target);
     });
+    // When switching to Pokedex, refresh list
+    if (target === 'pokedex') {
+      groupPokemon();
+      populatePokedex();
+    }
   });
+});
 
   // Close popup
   document.getElementById('closePopup').addEventListener('click', () => {
